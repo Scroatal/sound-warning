@@ -7,11 +7,12 @@ than executing a git pull on a child's computer.
 ## First setup
 
 The repository is [Scroatal/sound-warning](https://github.com/Scroatal/sound-warning).
-The first published Windows release is `v0.3.2`.
+The first published Windows release is `v0.3.3`. Cloud builds use Python 3.14.0
+to match the verified local Windows/Tk runtime.
 
 1. Connect this project to the public GitHub repository above, or a fork.
 2. Push the source and `.github/workflows/release.yml` to that repository.
-3. Create and push the tag `v0.3.2`. The workflow verifies that the tag matches
+3. Create and push the tag `v0.3.3`. The workflow verifies that the tag matches
    `sound_warning/__init__.py`, runs tests, builds Windows EXEs and publishes
    `SoundWarningPortable.exe` and `SoundWarning-Windows.zip`.
 4. Install that ZIP on each PC once. Release builds embed the repository name.
@@ -30,9 +31,9 @@ credentials are bundled with the app or stored on the boys' computers.
 
 ## Each update
 
-1. Make and test the change, then bump `__version__` (for example `0.3.3`).
+1. Make and test the change, then bump `__version__` (for example `0.3.4`).
 2. Commit and push the source.
-3. Push a matching tag, for example `v0.3.3`.
+3. Push a matching tag, for example `v0.3.4`.
 
 Every commit does not deploy automatically. The version tag deliberately
 marks the changes ready for the boys' PCs. A manual workflow run builds an
