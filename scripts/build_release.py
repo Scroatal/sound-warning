@@ -39,7 +39,18 @@ def main() -> None:
             "--name", name, "--distpath", "dist", "--workpath", f"build/{name}",
             "--specpath", f"build/{name}", f"scripts/{source}")
     app = ROOT / "dist" / "SoundWarningPortable.exe"
-    subprocess.run([str(app), "--self-test"], cwd=ROOT, check=True, timeout=30)
+    try:
+        subprocess.run([str(app), "--self-test"], cwd=ROOT, check=True, timeout=30)
+    except (subprocess.CalledProcessError, subprocess.TimeoutExpired):
+        # A windowless Python error can otherwise leave an invisible dialog in CI.
+        # Rebuild the same payload with a console to capture the actual startup error.
+        env["SOUND_WARNING_DIAGNOSTIC"] = "1"
+        run(sys.executable, "-m", "PyInstaller", "--noconfirm", "SoundWarningPortable.spec")
+        diagnostic = subprocess.run([str(ROOT / "dist" / "SoundWarningDiagnostic.exe"), "--self-test"],
+                                    cwd=ROOT, capture_output=True, text=True, timeout=60)
+        print(diagnostic.stdout, flush=True)
+        print(diagnostic.stderr, flush=True)
+        raise
     with app.open("rb") as stream:
         digest = hashlib.file_digest(stream, "sha256").hexdigest()
     (ROOT / "dist" / "SoundWarningPortable.exe.sha256").write_text(
