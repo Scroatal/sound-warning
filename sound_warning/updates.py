@@ -18,6 +18,7 @@ from . import __version__
 
 
 ASSET_NAME = "SoundWarningPortable.exe"
+DEFAULT_REPOSITORY = "Scroatal/sound-warning"
 MAX_BYTES = 150 * 1024 * 1024
 
 

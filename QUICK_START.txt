@@ -18,8 +18,8 @@ SOUND WARNING FOR WINDOWS 10/11 (64-bit)
 UPDATES
 Releases downloaded from the configured public GitHub repository can update
 the portable app automatically. GitHub release builds already include the
-repository address. For a local build, enter owner/repository under Updates
-and press Save Settings. Checks run at startup and every 6 hours.
+repository address. Local builds use Scroatal/sound-warning by default.
+Checks run at startup and every 6 hours.
 
 Updates download in the background. Installation waits until the control
 window is hidden/minimized and microphone volume is below the limit for

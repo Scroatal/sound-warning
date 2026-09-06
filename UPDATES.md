@@ -6,10 +6,12 @@ than executing a git pull on a child's computer.
 
 ## First setup
 
-1. Connect this project to a public GitHub repository. This folder originally
-   had no Git repository or remote, so no publishing destination is assumed.
+The repository is [Scroatal/sound-warning](https://github.com/Scroatal/sound-warning).
+The first published Windows release is `v0.3.1`.
+
+1. Connect this project to the public GitHub repository above, or a fork.
 2. Push the source and `.github/workflows/release.yml` to that repository.
-3. Create and push the tag `v0.3.0`. The workflow verifies that the tag matches
+3. Create and push the tag `v0.3.1`. The workflow verifies that the tag matches
    `sound_warning/__init__.py`, runs tests, builds Windows EXEs and publishes
    `SoundWarningPortable.exe` and `SoundWarning-Windows.zip`.
 4. Install that ZIP on each PC once. Release builds embed the repository name.
@@ -22,15 +24,15 @@ python -m venv .venv
 .\.venv\Scripts\python.exe scripts/build_release.py --repository OWNER/REPOSITORY
 ```
 
-Without `--repository`, the meter works normally and the repository can be
-entered in Settings later. Private repositories are not supported: no GitHub
+Without `--repository`, the app uses `Scroatal/sound-warning`. The repository can be
+changed in Settings later. Private repositories are not supported: no GitHub
 credentials are bundled with the app or stored on the boys' computers.
 
 ## Each update
 
-1. Make and test the change, then bump `__version__` (for example `0.3.1`).
+1. Make and test the change, then bump `__version__` (for example `0.3.2`).
 2. Commit and push the source.
-3. Push a matching tag, for example `v0.3.1`.
+3. Push a matching tag, for example `v0.3.2`.
 
 Every commit does not deploy automatically. The version tag deliberately
 marks the changes ready for the boys' PCs. A manual workflow run builds an

@@ -8,7 +8,7 @@ from typing import Any
 import math
 import sys
 
-from .updates import repository_name
+from .updates import DEFAULT_REPOSITORY, repository_name
 
 
 APP_NAME = "SoundWarning"
@@ -17,10 +17,10 @@ APP_NAME = "SoundWarning"
 def bundled_repository() -> str:
     path = Path(getattr(sys, "_MEIPASS", Path(__file__).resolve().parents[1])) / "build_config.json"
     if not path.is_file():
-        return ""
+        return DEFAULT_REPOSITORY
     raw = json.loads(path.read_text(encoding="utf-8"))
     value = raw.get("update_repository", "")
-    return repository_name(value) if value else ""
+    return repository_name(value) if value else DEFAULT_REPOSITORY
 
 
 @dataclass(slots=True)

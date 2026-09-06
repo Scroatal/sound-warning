@@ -1,5 +1,8 @@
 # Sound Warning
 
+[GitHub repository](https://github.com/Scroatal/sound-warning) |
+[Download the latest Windows release](https://github.com/Scroatal/sound-warning/releases/latest)
+
 ## Live meter and automatic updates (0.3.0)
 
 Use `dist\SoundWarning-Windows.zip` for the current release. Extract it to a
@@ -18,8 +21,9 @@ waits until the app is hidden/minimized and quiet, then restarts it. Existing
 settings are preserved. No Git or Python installation is needed on the boys' PCs.
 See [UPDATES.md](UPDATES.md) for repository setup, publishing and rollback details.
 
-No repository is assumed for a local build: enter `owner/repository` in Updates.
-Builds produced by the GitHub release workflow include the repository address.
+New installations and local builds use `Scroatal/sound-warning` for updates.
+An existing custom repository setting is preserved. Builds produced by the GitHub
+release workflow include their repository address, including when built from a fork.
 
 Build all three EXEs and the ZIP with:
 

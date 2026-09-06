@@ -7,6 +7,13 @@ from sound_warning.settings import Settings, load_settings, validate_settings
 
 
 class SettingsTests(unittest.TestCase):
+    def test_fresh_install_has_update_repository(self):
+        with tempfile.TemporaryDirectory() as folder:
+            path = Path(folder) / "settings.json"
+            settings = load_settings(path)
+            self.assertEqual(settings.update_repository, "Scroatal/sound-warning")
+            self.assertTrue(settings.auto_update)
+
     def test_existing_threshold_survives_upgrade(self):
         with tempfile.TemporaryDirectory() as folder:
             path = Path(folder) / "settings.json"
