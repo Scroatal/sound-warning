@@ -1,0 +1,39 @@
+name: Windows Release
+
+on:
+  push:
+    tags: ['v*']
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  build:
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.14'
+          architecture: x64
+      - name: Install build dependencies
+        run: python -m pip install -r requirements-build.txt
+      - name: Build and test
+        env:
+          RELEASE_REPOSITORY: ${{ github.repository }}
+          RELEASE_TAG: ${{ startsWith(github.ref, 'refs/tags/') && github.ref_name || '' }}
+        run: python scripts/build_release.py --repository "$env:RELEASE_REPOSITORY" --tag "$env:RELEASE_TAG"
+      - uses: actions/upload-artifact@v4
+        with:
+          name: SoundWarning-Windows
+          path: |
+            dist/SoundWarning-Windows.zip
+            dist/SoundWarningPortable.exe
+            dist/SoundWarningPortable.exe.sha256
+      - name: Publish tagged release
+        if: startsWith(github.ref, 'refs/tags/')
+        env:
+          GH_TOKEN: ${{ github.token }}
+          RELEASE_TAG: ${{ github.ref_name }}
+        run: gh release create "$env:RELEASE_TAG" dist/SoundWarningPortable.exe dist/SoundWarningPortable.exe.sha256 dist/SoundWarning-Windows.zip --verify-tag --generate-notes --title "Sound Warning $env:RELEASE_TAG"

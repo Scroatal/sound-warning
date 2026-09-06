@@ -1,0 +1,39 @@
+SOUND WARNING FOR WINDOWS 10/11 (64-bit)
+
+1. Extract this ZIP to a permanent folder in your Windows user account,
+   such as Documents\Sound Warning. Do not run it from inside the ZIP.
+2. Open SoundWarningPortable.exe. No Python or Git installation is needed.
+3. The microphone meter stays across the top of every connected screen.
+   Green: inside voice. Amber: approaching the limit. Red: too loud.
+   The white marker is the warning threshold. The percentage is relative
+   to that threshold, not a calibrated sound-pressure dB measurement.
+4. Adjust the threshold and press Save Settings. The meter uses the same
+   smoothed loudness value as the warning detector. Test Warning previews
+   the red border without adding a warning count.
+5. Run InstallSoundWarningStartup.exe while signed into the child's Windows
+   account. The app will start in the background on that user's next sign-in.
+   Run RemoveSoundWarningStartup.exe to remove startup. Keep the app folder
+   in the same place after installing startup.
+
+UPDATES
+Releases downloaded from the configured public GitHub repository can update
+the portable app automatically. GitHub release builds already include the
+repository address. For a local build, enter owner/repository under Updates
+and press Save Settings. Checks run at startup and every 6 hours.
+
+Updates download in the background. Installation waits until the control
+window is hidden/minimized and microphone volume is below the limit for
+10 seconds, with no active warning or quiet-time overlay. You can also use
+Install and Restart. Settings stay in %APPDATA%\SoundWarning\settings.json.
+
+Offline computers keep monitoring normally. Updates need a writable app
+folder. Private GitHub repositories are not supported by this version.
+
+The top strip is click-through so mouse clicks still reach the application
+under it. Exclusive-fullscreen games may cover Windows overlays; choose
+borderless/windowed display mode to see the meter while gaming.
+
+PRIVACY
+No audio is saved, uploaded, transcribed, or analysed for words. Only live
+loudness values are used. Update checks contact GitHub without sending
+microphone readings. Quit in the control window or tray stops monitoring.
